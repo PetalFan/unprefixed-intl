@@ -1,0 +1,10 @@
+{
+  "name": "unprefixed-intl",
+  "version": "1.0.0",
+  "description": "An i18n library enabling translations without URL prefixes",
+  "main": "index.js",
+  "repository": "https://github.com/PetalFan/unprefixed-intl.git",
+  "author": "PetalFan",
+  "license": "MIT",
+  "private": false
+}
