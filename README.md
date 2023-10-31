@@ -1,16 +1,7 @@
 # unprefixed-intl
 An i18n library enabling translations without URL prefixes
 
-`https://petalfan.com`  => `en` url
-
-`https://petalfan.com`  => `es` url
-
-`https://petalfan.com`  => `en-GB` url
-
-the translations will be read on the server side, in the example of this README using [Accept Language Header](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Language), but can be used from from a list of preferred languages, example:
-```typescript
-const acceptLanguages = ["en","en-US","en"]
-```
+There is a wrapper for next.js [here](https://www.npmjs.com/package/next-unprefixed-intl/)
 
 # Usage
 Add an `unprefixed-intl.config.json` file to the project root:
@@ -79,39 +70,19 @@ Add the translation files inside the `messagesPath` directory:
 ```
 
 # In the place you want to read the translations:
-this example is using Next.js, but it can be in any Node.js project:
+
 `./src/app/page.tsx`
 ```typescript jsx
-//#region just for example
-import { headers } from 'next/headers'
-//#endregion
+import { getTranslations } from "unprefixed-intl"
 
-import { getTranslations } from "unprefixed-intl/dist"
+const acceptLanguages = ["en-US","en"]
 
-//#region just for example
-export default function Home() {
-    const headersList = headers()
-    let acceptLanguages: string[]
-    const referer = headersList.get('accept-language')
-    if (referer) {
-        acceptLanguages = referer.split(',')
-    } else
-        acceptLanguages = []
-    //#endregion
-    
-    /*
-    here you will receive the function that returns the 
-    translations, based on a path (`"Home.component1"`), 
-    and a string array (`acceptLanguages`), the order of 
-    the elements of this array is important, as it 
-    determines which translations will be prioritized
-     */
-    const t = getTranslations("Home.component1", acceptLanguages)
-    
-    //#region just for example
-    return(
-        <p>{t("hello_message")}</p>
-    )
-}
-//#endregion
+/*
+here you will receive the function that returns the 
+translations, based on a path (`"Home.component1"`), 
+and a string array (`acceptLanguages`), the order of 
+the elements of this array is important, as it 
+determines which translations will be prioritized
+ */
+const t = getTranslations("Home.component1", acceptLanguages)
 ```

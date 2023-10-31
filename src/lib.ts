@@ -56,9 +56,9 @@ export function bestAvailableOption(acceptLanguages:string[]):string{
 /**
  * Provides a translation function based on the accepted languages and a specified path.
  *
+ * @param path - The main path for the translation.
  * @param acceptLanguages - An array of accepted languages, typically returned from the `accept-language` header.
  * The function will use the first available language in the order of the array. If none are found, it will use the default language.
- * @param path - The main path for the translation.
  *
  * @returns A function that, when given a `subPath`, returns the translation string located within the main `path`.
  */
