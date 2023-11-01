@@ -1,5 +1,4 @@
 import * as fs from "fs"
-import * as path from "path";
 
 export interface Config{
     /** Path for the `messages` folder, that will alloc the .json files with the translations, (en-US.json, ...) */
@@ -14,9 +13,9 @@ export interface Config{
     allowLanguageCode:boolean
 }
 
-const configPath = path.join('unprefixed-intl.config.json')
+const configPath = process.cwd()+'/unprefixed-intl.config.json'
 
-let aConfig:Config;
+let aConfig:Config|undefined = undefined;
 if (fs.existsSync(configPath)){
     try{
         const requireResult = JSON.parse(fs.readFileSync(configPath,'utf-8')) as Config;
@@ -28,13 +27,14 @@ if (fs.existsSync(configPath)){
         }
         aConfig = requireResult;
     }catch (err){
-        console.log("failed to read config from "+configPath+", cause: "+err)
+        console.log("failed to read unprefixed-intl.config.json from "+configPath+", cause: "+err)
     }
 }
 if (!aConfig){
-    let withSrc = path.resolve('src/messages')
-    let withoutSrc = path.resolve('messages')
-    if (fs.existsSync(withSrc)){
+    console.log("unprefixed-intl.config.json file not found")
+    let withSrc = "/src/messages"
+    let withoutSrc = "/messages"
+    if (fs.existsSync(process.cwd()+withSrc)){
         aConfig = {
             messagesPath: withSrc,
             defaultLang: 'en',

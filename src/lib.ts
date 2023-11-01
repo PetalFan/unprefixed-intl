@@ -8,10 +8,11 @@ type JsonType = {
         [key: string]: string;
     }
 }
-fs.readdirSync(config.messagesPath)
+const messagesFolderPath = process.cwd()+"/"+config.messagesPath+"/"
+fs.readdirSync(messagesFolderPath)
     .filter(filename => path.extname(filename) === '.json')
     .forEach(filename => {
-        const filePath = path.join(config.messagesPath, filename);
+        const filePath = messagesFolderPath + filename;
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const data = JSON.parse(fileContent) as JsonType;
 

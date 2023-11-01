@@ -7,7 +7,7 @@ There is a wrapper for next.js [here](https://www.npmjs.com/package/next-unprefi
 Add an `unprefixed-intl.config.json` file to the project root:
 ```json
 {
-  "messagesPath": "./src/messages",
+  "messagesPath": "/src/messages",
   "defaultLang": "en",
   "maxAcceptedLanguageSearch": 3,
   "allowLanguageCode": true
@@ -32,7 +32,7 @@ interface Config{
 
 Add the translation files inside the `messagesPath` directory:
 
-`en` language example: `./src/messages/en.json`
+`en` language example: `/src/messages/en.json`
 ```json
 {
   "Home.component1": {
@@ -44,7 +44,7 @@ Add the translation files inside the `messagesPath` directory:
   }
 }
 ```
-`es` language example: `./src/messages/es.json`
+`es` language example: `/src/messages/es.json`
 ```json
 {
   "Home.component1": {
@@ -56,7 +56,7 @@ Add the translation files inside the `messagesPath` directory:
   }
 }
 ```
-`en-GB` language example: `./src/messages/en-GB.json`
+`en-GB` language example: `/src/messages/en-GB.json`
 ```json
 {
   "Home.component1": {
@@ -71,7 +71,7 @@ Add the translation files inside the `messagesPath` directory:
 
 # In the place you want to read the translations:
 
-`./src/app/page.tsx`
+`/src/app/page.tsx`
 ```typescript jsx
 import { getTranslations } from "unprefixed-intl"
 
