@@ -86,3 +86,67 @@ determines which translations will be prioritized
  */
 const t = getTranslations("Home.component1", acceptLanguages)
 ```
+
+# In addition
+You can use `generate` to generate files based in translations api, in that example, the [Google Cloud Translate api](https://www.npmjs.com/package/@google-cloud/translate)
+```typescript
+import { generate } from "unprefixed-intl"
+import { v2 } from "@google-cloud/translate"
+
+const CREDENTIALS = JSON.parse(/*secret, check the Google Cloud Translation api for more info*/)
+
+const translate = new v2.Translate({
+    credentials: CREDENTIALS,
+    projectId: CREDENTIALS.project_id,
+})
+
+async function translateTextFromSource(
+    text: string,
+    sourceLanguage: string,
+    targetLanguage: string,
+) {
+    const [response] = await translate.translate(text, {
+        from: sourceLanguage,
+        to: targetLanguage,
+    })
+    return response
+}
+
+const fromLanguage = "en"
+generate(
+    fromLanguage,
+    [
+        //["en", "en"], // English
+        ["zh", "zh"], // Chinese Mandarin
+        ["hi", "hi"], // Hindi
+        ["es", "es"], // Spanish
+        ["fr", "fr"], // French
+        ["ar", "ar"], // Arabic
+        ["bn", "bn"], // Bengali
+        ["ru", "ru"], // Russian
+        ["pt-BR", "pt"], // Portuguese from Brazil
+        ["pt-PT", "pt-PT"], // Portuguese from Portugal
+        ["pt", "pt"], // Portuguese
+        ["id", "id"], // Indonesian
+        ["de", "de"], // German
+        ["ja", "ja"], // Japanese
+        ["ur", "ur"], // Urdu
+        ["it", "it"], // Italian
+        ["ko", "ko"], // Korean
+        ["tr", "tr"], // Turkish
+        ["vi", "vi"], // Vietnamese
+        ["pl", "pl"], // Polish
+        ["jv", "jv"], // Javanese
+        ["pa", "pa"], // Punjabi
+    ],
+    (text, to) => translateTextFromSource(text, fromLanguage, to),
+    (to) => {
+        console.log(`Successfully generated ${to} translations.`)
+        return true
+    },
+    (error) => {
+        console.error("Error during translation:", error)
+        return false
+    },
+)
+```
