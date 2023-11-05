@@ -126,7 +126,6 @@ generate(
         ["ru", "ru"], // Russian
         ["pt-BR", "pt"], // Portuguese from Brazil
         ["pt-PT", "pt-PT"], // Portuguese from Portugal
-        ["pt", "pt"], // Portuguese
         ["id", "id"], // Indonesian
         ["de", "de"], // German
         ["ja", "ja"], // Japanese
